@@ -8,31 +8,40 @@ const imageCont = document.getElementById('imgCont')
 let pexelsArr = [];
 let interval;
 
-fetch(`https://api.pexels.com/v1/search/?per_page=${amount}&query=${query}&orientation=landscape`, {
-	method: 'GET',
-	headers: {
-		Accept: 'application/json',
-		Authorization: auth
-	}
-})
-.then(function(response){return response.json();})
-.then(function(json){getImgSrc(json);})
+call(1)
+call(2)
+function call(page){
+	fetch(`https://api.pexels.com/v1/search/?page=${page}&per_page=${amount}&query=${query}&orientation=landscape`, {
+		method: 'GET',
+		headers: {
+			Accept: 'application/json',
+			Authorization: auth
+		}
+	})
+	.then(function(response){return response.json();})
+	.then(function(json){getImgSrc(json);})
+}
 
 function getImgSrc(data) {
 	console.log(data)
 	for(let i=0; i<data.photos.length; i+=1){
-		let photoSrc = {'src': data.photos[i].src.landscape,'photographer': data.photos[i].photographer, 'alt': 'wrong'}
+		let photoSrc = {'src': data.photos[i].src.original,'photographer': data.photos[i].photographer, 'alt': 'wrong'}
 		pexelsArr.push(photoSrc);
 	}
-	let eddie = {'src': 'assets/eddie.jpg','photographer': 'Kuan Hsieh', 'alt': 'correct'}
-	pexelsArr.push(eddie);
-	changeImg(pexelsArr);
+	for(let j=0; j<2; j+=1){
+		let eddie = {'src': 'assets/eddie_large.jpg','photographer': 'Kuan Hsieh', 'alt': 'correct'}
+		pexelsArr.push(eddie);
+	}
+	if(pexelsArr.length<84){
+		changeImg(pexelsArr);
+	}
+	console.log(pexelsArr)
 }
 
 function changeImg() {
   // check if an interval has already been set up
   if (!interval) {
-    interval = setInterval(flashImg, 700);
+    interval = setInterval(flashImg, 2000);
   }
 }
 
@@ -44,8 +53,6 @@ function flashImg(){
 		caption.innerHTML = 'photo by ' + pexelsArr[random].photographer;
 	});
 }
-
-
 
 // adjust image size when window resize
 image.onload = function(){imgAdjst()};
