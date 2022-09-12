@@ -51,22 +51,23 @@ body{
 }
 p{
 	margin-left: 20px;
-	color: #fff;
 	position: fixed;
 	z-index: 10;
 	padding: 10px;
 }
 a{
-	color: white;
+	color: #fff;
 	cursor: default;
 	text-decoration: underline 1.5px solid #fff;
 	text-underline-offset: 4px;
 }
 #top{
+	color: #000;
 	top: 10px;
 	font-size: 30px;
 }
 #bottom{
+	color: #fff;
 	bottom: 10px;
 	font-size: 14px;
 }

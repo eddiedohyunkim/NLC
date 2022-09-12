@@ -23,7 +23,6 @@ function call(page){
 }
 
 function getImgSrc(data) {
-	console.log(data)
 	for(let i=0; i<data.photos.length; i+=1){
 		let photoSrc = {'src': data.photos[i].src.original,'photographer': data.photos[i].photographer, 'alt': 'wrong'}
 		pexelsArr.push(photoSrc);
@@ -36,6 +35,7 @@ function getImgSrc(data) {
 		changeImg(pexelsArr);
 	}
 	console.log(pexelsArr)
+	
 }
 
 function changeImg() {
@@ -45,13 +45,35 @@ function changeImg() {
   }
 }
 
+function findEddieTitle(){
+	title.innerHTML = 'Find Eddie';
+	title.style.color = '#fff';
+}
+
 function flashImg(){
+	findEddieTitle();
 	let random = Math.floor(Math.random()*pexelsArr.length);
 	image.setAttribute('src', pexelsArr[random].src );
 	image.setAttribute('alt', pexelsArr[random].alt );
 	image.addEventListener('load', (event) => {
 		caption.innerHTML = 'photo by ' + pexelsArr[random].photographer;
 	});
+}
+
+window.addEventListener('click', decision);
+function decision() {
+	clearInterval(interval);
+	// release our intervalID from the variable
+	interval = null;
+	if(image.alt==='correct'){
+		title.innerHTML = 'You found Eddie, good job';
+		imageCont.style.backgroundColor='#00ff00';
+		image.style.mixBlendMode = 'multiply';
+	}else{
+		title.innerHTML = 'This is not Eddie, <a href="./index.html">try again<a>';
+		imageCont.style.backgroundColor='#ff0000';
+		image.style.mixBlendMode = 'multiply';
+	}
 }
 
 // adjust image size when window resize
@@ -73,18 +95,3 @@ function imgAdjst(){
 	}
 }
 
-window.addEventListener('click', decision);
-function decision() {
-	clearInterval(interval);
-	// release our intervalID from the variable
-	interval = null;
-	if(image.alt==='correct'){
-		title.innerHTML = 'Success';
-		imageCont.style.backgroundColor='#00ff00';
-		image.style.mixBlendMode = 'multiply';
-	}else{
-		title.innerHTML = 'Fail, <a href="./index.html">try again<a>';
-		imageCont.style.backgroundColor='#ff0000';
-		image.style.mixBlendMode = 'multiply';
-	}
-}
