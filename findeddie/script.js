@@ -1,16 +1,22 @@
+// API key
 const auth = '563492ad6f917000010000016536199d8d8a4160bc6bb0af7df478e6';
+// maximum amount of item per request
 const amount = '80';
+// my search keyword
 const query = '"asian%20male"%20face';
+const imageCont = document.getElementById('imgCont')
 const image = document.querySelector('img');
 const title = document.getElementById('top');
 const caption = document.getElementById('bottom');
-const imageCont = document.getElementById('imgCont')
+// array where all the pexels images are stored.
 let pexelsArr = [];
 let interval;
 
-call(1)
-call(2)
-function call(page){
+// request 80 images 2 times = 160 images total 
+request(1)
+request(2)
+function request(page){
+	// get 80 search results of ( "asian male" face ) from page 1 and page 2, filter landscape orientation only 
 	fetch(`https://api.pexels.com/v1/search/?page=${page}&per_page=${amount}&query=${query}&orientation=landscape`, {
 		method: 'GET',
 		headers: {
@@ -19,35 +25,29 @@ function call(page){
 		}
 	})
 	.then(function(response){return response.json();})
-	.then(function(json){getImgSrc(json);})
+	.then(function(json){getImg(json);})
 }
 
-function getImgSrc(data) {
-	for(let i=0; i<data.photos.length; i+=1){
+function getImg(data) {
+	// push pexels images to pexelsArr 
+	for(let i=0; i<data.photos.length; i+=1){	
 		let photoSrc = {'src': data.photos[i].src.original,'photographer': data.photos[i].photographer, 'alt': 'wrong'}
 		pexelsArr.push(photoSrc);
 	}
+	// push my portrait n times as well 
 	for(let j=0; j<2; j+=1){
 		let eddie = {'src': 'assets/eddie_large.jpg','photographer': 'Kuan Hsieh', 'alt': 'correct'}
 		pexelsArr.push(eddie);
 	}
-	if(pexelsArr.length<84){
-		changeImg(pexelsArr);
-	}
-	console.log(pexelsArr)
-	
+	console.log(pexelsArr);
 }
 
+changeImg();
 function changeImg() {
   // check if an interval has already been set up
   if (!interval) {
     interval = setInterval(flashImg, 2000);
   }
-}
-
-function findEddieTitle(){
-	title.innerHTML = 'Find Eddie';
-	title.style.color = '#fff';
 }
 
 function flashImg(){
@@ -60,10 +60,14 @@ function flashImg(){
 	});
 }
 
-window.addEventListener('click', decision);
+function findEddieTitle(){
+	title.innerHTML = 'Find Eddie';
+	title.style.color = '#fff';
+}
+
+image.addEventListener('click', decision);
 function decision() {
 	clearInterval(interval);
-	// release our intervalID from the variable
 	interval = null;
 	if(image.alt==='correct'){
 		title.innerHTML = 'You found Eddie, good job';
@@ -76,7 +80,7 @@ function decision() {
 	}
 }
 
-// adjust image size when window resize
+// maintain full bleed image size in any window size
 image.onload = function(){imgAdjst()};
 window.addEventListener('resize', imgAdjst);
 
