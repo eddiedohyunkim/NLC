@@ -1,0 +1,83 @@
+const auth = '563492ad6f917000010000016536199d8d8a4160bc6bb0af7df478e6';
+const amount = '80';
+const query = '"asian%20male"%20face';
+const image = document.querySelector('img');
+const title = document.getElementById('top');
+const caption = document.getElementById('bottom');
+const imageCont = document.getElementById('imgCont')
+let pexelsArr = [];
+let interval;
+
+fetch(`https://api.pexels.com/v1/search/?per_page=${amount}&query=${query}&orientation=landscape`, {
+	method: 'GET',
+	headers: {
+		Accept: 'application/json',
+		Authorization: auth
+	}
+})
+.then(function(response){return response.json();})
+.then(function(json){getImgSrc(json);})
+
+function getImgSrc(data) {
+	console.log(data)
+	for(let i=0; i<data.photos.length; i+=1){
+		let photoSrc = {'src': data.photos[i].src.landscape,'photographer': data.photos[i].photographer, 'alt': 'wrong'}
+		pexelsArr.push(photoSrc);
+	}
+	let eddie = {'src': 'assets/eddie.jpg','photographer': 'Kuan Hsieh', 'alt': 'correct'}
+	pexelsArr.push(eddie);
+	changeImg(pexelsArr);
+}
+
+function changeImg() {
+  // check if an interval has already been set up
+  if (!interval) {
+    interval = setInterval(flashImg, 700);
+  }
+}
+
+function flashImg(){
+	let random = Math.floor(Math.random()*pexelsArr.length);
+	image.setAttribute('src', pexelsArr[random].src );
+	image.setAttribute('alt', pexelsArr[random].alt );
+	image.addEventListener('load', (event) => {
+		caption.innerHTML = 'photo by ' + pexelsArr[random].photographer;
+	});
+}
+
+
+
+// adjust image size when window resize
+image.onload = function(){imgAdjst()};
+window.addEventListener('resize', imgAdjst);
+
+function imgAdjst(){
+	let winW = window.innerWidth;
+	let winH = window.innerHeight;
+	let imgW = image.clientWidth;
+	let imgH = image.clientHeight;
+	image.style.width = '100vw';
+	if((imgW/imgH)>(winW/winH)){
+		image.setAttribute('style', 'height:100vh; width:auto; mix-blend-mode:multiply;');
+		image.style.marginLeft = Math.floor((image.clientWidth-winW)/2*(-1))+'px';
+	}else{
+		image.setAttribute('style', 'width:100vw; height:auto; mix-blend-mode:multiply;');
+		image.style.marginTop = Math.floor((image.clientHeight-winH)/2*(-1))+'px';
+	}
+}
+
+window.addEventListener('click', decision);
+function decision() {
+	clearInterval(interval);
+	// release our intervalID from the variable
+	interval = null;
+	if(image.alt==='correct'){
+		title.innerHTML = 'Success';
+		imageCont.style.backgroundColor='#00ff00';
+		image.style.mixBlendMode = 'multiply';
+	}else{
+		title.innerHTML = 'Fail, <a href="./index.html">try again<a>';
+		imageCont.style.backgroundColor='#ff0000';
+		image.style.mixBlendMode = 'multiply';
+	}
+}
