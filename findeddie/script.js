@@ -67,7 +67,7 @@ function decision() {
 	interval = null;
 	if(image.alt==='correct'){
 		title.innerHTML = 'You found Eddie, good job';
-		imageCont.style.backgroundColor='#00ff00';
+		imageCont.style.backgroundColor='#00aaFF';
 		image.style.mixBlendMode = 'multiply';
 	}else{
 		title.innerHTML = 'This is not Eddie, <a href="./index.html">try again<a>';
