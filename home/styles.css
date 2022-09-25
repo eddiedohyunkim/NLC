@@ -31,6 +31,8 @@ footer, header, hgroup, menu, nav, section {
 body {
 	font-family: Arial_Black;
 	line-height: 1;
+	background-color: white;
+	/*mix-blend-mode: difference;*/
 }
 div{
 	position: fixed;
@@ -39,6 +41,11 @@ div{
 a{
 	color: #000;
 }
+
+img{
+   fill: green;
+}
+
 @media (hover) and (min-width: 400px) {
 	body {font-size: 1em;}
 }
