@@ -32,20 +32,20 @@ body {
 	font-family: Arial_Black;
 	line-height: 1;
 }
-@media (hover) and (min-width: 600px) {
-	body {
-		font-size: 1em;
-	}
+div{
+	position: fixed;
+	top: 0;
 }
-@media (hover) and (min-width: 800px) {
-	body {
-		font-size: 1.5em;
-	}
-@media (hover) and (min-width: 1000px) {
-	body {
-		font-size: 2em;
-	}
-
 a{
 	color: #000;
 }
+@media (hover) and (min-width: 400px) {
+	body {font-size: 1em;}
+}
+@media (hover) and (min-width: 800px) {
+	body {font-size: 1.5em;}
+}
+@media (hover) and (min-width: 1000px) {
+	body {font-size: 2em;}
+}
+
