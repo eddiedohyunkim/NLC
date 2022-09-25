@@ -33,7 +33,7 @@ body{
 		line-height: 1;
 		/*background-color: #000;*/
 	}
-@media (hover) and (min-width: 400px) {
+@media (hover) and (min-width: 10px) {
 
 	#container{
 		position: fixed;
