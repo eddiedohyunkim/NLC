@@ -4,13 +4,15 @@ const hourCont = document.getElementById('hourCont');
 const minCont = document.getElementById('minCont');
 const redSnail = document.getElementById('redSnail');
 const blueSnail = document.getElementById('blueSnail');
+const digitalClock = document.getElementById('digitalClock');
 let imgWH;
-let spanFontSize
+let spanFontSize;
 let spanSize;
 let timeContW = 0.35;
 setClockDim();
-window.addEventListener('load',spell)
-window.addEventListener('load',spellTime)
+window.addEventListener('load',spell);
+window.addEventListener('load',spellTime);
+window.addEventListener('load',digitalClock);
 window.addEventListener('resize',setClockDim);
 
 function setClockDim(){
@@ -21,12 +23,16 @@ function setClockDim(){
 	container.style.height = imgWH+'px';
 	hourCont.style.width = imgWH*timeContW+'px';
 	hourCont.style.height = imgWH+'px';
-	hourCont.style.left = (imgWH/2)-(imgWH*timeContW/2)+'px'
+	hourCont.style.left = (imgWH/2)-(imgWH*timeContW/2)+'px';
 	minCont.style.width = imgWH*timeContW+'px';
 	minCont.style.height = imgWH+'px';
-	minCont.style.left = (imgWH/2)-(imgWH*timeContW/2)+'px'
-	redSnail.style.top = imgWH/4+'px'
-	blueSnail.style.top = imgWH/8+'px'
+	minCont.style.left = (imgWH/2)-(imgWH*timeContW/2)+'px';
+	redSnail.style.top = imgWH/4+'px';
+	blueSnail.style.top = imgWH/8+'px';
+	digitalClock.style.top = imgWH*0.518+'px';
+	digitalClock.style.left = (imgWH/2)+'px';
+	digitalClock.style.fontSize = spanFontSize*0.3+'px';
+	digitalClock.style.letterSpacing = '0px';
 	setNumbers()
 }
 
@@ -52,7 +58,6 @@ function spell(){
 		count++;
 		if(count === 12){ 
 			clearInterval(interval);
-
 		}
 	}, 50);
 }
@@ -99,4 +104,20 @@ function updateTime(){
 
     hourCont.style.transform = 'rotate('+hour+'rad)';
     minCont.style.transform = 'rotate('+min+'rad)'; 
+}
+
+setInterval(digitalClck, 1000);
+function digitalClck(){
+	const now = new Date();
+    let h = now.getHours();
+    let m = now.getMinutes();
+    let s = now.getSeconds();
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+    
+    let digiTime = h + ":" + m + ":" + s;
+
+    digitalClock.innerText = digiTime;
+    digitalClock.textContent = digiTime;
 }

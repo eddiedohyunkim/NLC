@@ -29,9 +29,9 @@ footer, header, hgroup, menu, nav, section {
 	src: url(assets/HelveticaNeue.ttc);
 }
 body{
-		font-family: Helvetica;
-		line-height: 1;
-	}
+	font-family: Helvetica;
+	line-height: 1;
+}
 #container{
 	position: fixed;
 	top: 0;
@@ -68,4 +68,11 @@ body{
 #redSnail, #blueSnail{
 	position: fixed;
 	width: 100%;
+}
+#digitalClock{
+	position: fixed;
+	left: 50vw;
+	text-align: center;
+	transform: translate(-48%, -50%);
+	color: #dcdcdc;
 }
