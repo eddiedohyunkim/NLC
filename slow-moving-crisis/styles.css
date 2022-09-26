@@ -44,6 +44,9 @@ body{
     width:100%;
     height:100%;
     background: #f0f0f0;
+    box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
     border: 1px solid black;
 }
 .numbers{
@@ -73,6 +76,7 @@ body{
 	position: fixed;
 	left: 50vw;
 	text-align: center;
-	transform: translate(-48%, -50%);
+	/*border: solid 1px green ;*/
+	transform: translate(-49%, -50%);
 	color: #dcdcdc;
 }

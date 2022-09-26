@@ -112,11 +112,12 @@ function digitalClck(){
     let h = now.getHours();
     let m = now.getMinutes();
     let s = now.getSeconds();
-    h = (h < 10) ? "0" + h : h;
-    m = (m < 10) ? "0" + m : m;
-    s = (s < 10) ? "0" + s : s;
+    h = (h < 10) ? '0' + h : h;
+    m = (m < 10) ? '0' + m : m;
+    s = (s < 10) ? '0' + s : s;
     
-    let digiTime = h + ":" + m + ":" + s;
+    let digiTime = h+':'+m+':'+s;
+    // let digiTime = '11:11:11';
 
     digitalClock.innerText = digiTime;
     digitalClock.textContent = digiTime;
