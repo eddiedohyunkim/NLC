@@ -29,7 +29,7 @@ function setClockDim(){
 	minCont.style.left = (imgWH/2)-(imgWH*timeContW/2)+'px';
 	redSnail.style.top = imgWH/4+'px';
 	blueSnail.style.top = imgWH/8+'px';
-	digitalClock.style.top = imgWH*0.518+'px';
+	digitalClock.style.top = imgWH*0.547+'px';
 	digitalClock.style.left = (imgWH/2)+'px';
 	digitalClock.style.fontSize = spanFontSize*0.3+'px';
 	digitalClock.style.letterSpacing = '0px';
