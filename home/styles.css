@@ -43,7 +43,7 @@ a{
 }
 
 img{
-   fill: green;
+   filter: brightness(0%);
 }
 
 @media (hover) and (min-width: 400px) {
