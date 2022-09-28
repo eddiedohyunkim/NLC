@@ -28,6 +28,7 @@ footer, header, hgroup, menu, nav, section {
 	font-family: Helvetica;
 	src: url(assets/HelveticaNeue.ttc);
 }
+
 body{
 	font-family: Helvetica;
 	line-height: 1;
@@ -38,16 +39,19 @@ body{
 	left: 50vw;
 	transform: translate(-50%, 0%);
 }
+img{
+	width: 100%;
+}
 #clockface{
     border-radius: 50%;
     behavior: url(PIE.htc);
     width:100%;
     height:100%;
-    background: #f0f0f0;
+    background: #ffffff;
     box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
-    border: 1px solid black;
+    border: 2px solid black;
 }
 .numbers{
 	opacity: 0;
@@ -55,28 +59,27 @@ body{
 	position: fixed;
 	text-align: center;
 	transform: translate(-50%, -50%);
+	/*border: solid 1px green;*/
 }
 #hourCont{
 	position: fixed;
 	top: 0;
-	transform: rotate(0deg);
+	transform: rotate(0rad);
 	/*border: 1px solid red;*/
 }
 #minCont{
 	position: fixed;
 	top: 0;
-	transform: rotate(0deg);
+	transform: rotate(0rad);
 	/*border: 1px solid blue;*/
 }
-#redSnail, #blueSnail{
+#secCont{
+	position: fixed;
+	top: 0;
+	transform: rotate(0rad);
+	/*border: 1px solid black;*/
+}
+#redSnail, #blueSnail, #graySnail{
 	position: fixed;
 	width: 100%;
-}
-#digitalClock{
-	position: fixed;
-	left: 50vw;
-	text-align: center;
-	/*border: solid 1px green ;*/
-	transform: translate(-49%, -50%);
-	color: #dcdcdc;
 }
