@@ -41,11 +41,9 @@ div{
 a{
 	color: #000;
 }
-
-img{
-   filter: brightness(0%);
+#eddie{
+	fill: #000000;
 }
-
 @media (hover) and (min-width: 400px) {
 	body {font-size: 1em;}
 }

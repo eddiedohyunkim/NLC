@@ -11,10 +11,12 @@ const colorArray = [
     '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'
 ];
 const body = document.body;
-const img = document.querySelector('img');
+const svg = document.getElementById('eddie');
 const change = document.getElementsByClassName('change');
+// const bodyColor = document.getElementById('bodyColor');
+// const svgColor = document.getElementById('svgColor');
 
-document.addEventListener('visibilitychange', function (event){ document.hidden ? color() : setTimeout(hideColor, 300) } );
+document.addEventListener('visibilitychange', function (event){ document.hidden ? color() : setTimeout(hideColor, 500) } );
 
 function random(num){ return Math.floor(Math.random()*num) }
 
@@ -22,8 +24,19 @@ function color(){
     for(let i=0; i<change.length;i+=1){
         change[i].style.WebkitTransitionDuration='0s';
     }
-    body.style.backgroundColor = colorArray[ random(colorArray.length) ];
-    img.style.filter = `brightness(100%) hue-rotate(${ random(360) }deg)`;
+    let bgPickColor = random(colorArray.length);
+    let svgPickColor = random(colorArray.length);
+
+    if(bgPickColor==svgPickColor){
+        svgPickColor = random(colorArray.length);
+    }
+
+    body.style.backgroundColor = colorArray[bgPickColor];
+        // bodyColor.innerHTML = colorArray[bgPickColor];
+        // bodyColor.style.color = colorArray[bgPickColor];
+    svg.style.fill = colorArray[svgPickColor];
+        // svgColor.innerHTML = colorArray[svgPickColor];
+        // svgColor.style.color = colorArray[svgPickColor];
 }
 
 function hideColor(){
@@ -32,5 +45,5 @@ function hideColor(){
         change[i].style.WebkitTransitionDuration = '300ms';
     }
     body.style.backgroundColor = '#FFFFFF';
-    img.style.filter = `brightness(0%)`;
+    svg.style.fill = '#000000';
 }
