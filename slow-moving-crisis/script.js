@@ -7,7 +7,7 @@ const allHands = document.getElementsByClassName('hands');
 const redSnail = document.getElementById('redSnail');
 const blueSnail = document.getElementById('blueSnail');
 let imgWH;
-const timeContW = 0.45;
+const timeContW = 0.5;
 setClockDim();
 window.addEventListener('load',spellTime);
 window.addEventListener('resize',setClockDim);
@@ -21,9 +21,9 @@ function setClockDim(){
 		allHands[i].style.height = imgWH+'px';
 		allHands[i].style.left = (imgWH/2)-(imgWH*timeContW/2)+'px';
 	}
-	redSnail.style.top = imgWH/170+'px';
-	blueSnail.style.top = imgWH/170+'px';
-	graySnail.style.top = imgWH/170+'px';
+	redSnail.style.top = imgWH/220+'px';
+	blueSnail.style.top = imgWH/220+'px';
+	graySnail.style.top = imgWH/220+'px';
 }
 
 function time(){
@@ -45,6 +45,7 @@ function spellTime(){
 	let whatTime = time();
 	let hour = whatTime.hour;
 	let min = whatTime.min;
+	let milsec = whatTime.milsec;
 	let sec = whatTime.sec+(Math.PI/30)+(10*Math.PI/(500*60));
 
 	for(let i=0; i<allHands.length; i+=1){
