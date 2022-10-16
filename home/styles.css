@@ -40,9 +40,17 @@ div{
 }
 a{
 	color: #000;
+	/*text-decoration: none;*/
 }
 #eddie{
 	fill: #000000;
+}
+.link{
+	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+	font-size: 0.8em;
+	padding-left: 0.1em;
+	font-weight: 800;
+	
 }
 @media (hover) and (min-width: 400px) {
 	body {font-size: 1em;}

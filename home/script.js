@@ -13,10 +13,20 @@ const colorArray = [
 const body = document.body;
 const svg = document.getElementById('eddie');
 const change = document.getElementsByClassName('change');
-// const bodyColor = document.getElementById('bodyColor');
-// const svgColor = document.getElementById('svgColor');
+const bodyColor = document.getElementById('bodyColor');
+const svgColor = document.getElementById('svgColor');
 
 document.addEventListener('visibilitychange', function (event){ document.hidden ? color() : setTimeout(hideColor, 500) } );
+
+(function(){
+    let links = document.getElementsByTagName('a');
+    for(const element of links){
+        let linkArrow = document.createElement("span");
+        linkArrow.innerHTML = '[&#8599;]';
+        linkArrow.className = 'link';
+        element.appendChild(linkArrow);
+    }
+}())
 
 function random(num){ return Math.floor(Math.random()*num) }
 
@@ -32,11 +42,11 @@ function color(){
     }
 
     body.style.backgroundColor = colorArray[bgPickColor];
-        // bodyColor.innerHTML = colorArray[bgPickColor];
-        // bodyColor.style.color = colorArray[bgPickColor];
+        bodyColor.innerHTML = colorArray[bgPickColor];
+        bodyColor.style.color = colorArray[bgPickColor];
     svg.style.fill = colorArray[svgPickColor];
-        // svgColor.innerHTML = colorArray[svgPickColor];
-        // svgColor.style.color = colorArray[svgPickColor];
+        svgColor.innerHTML = colorArray[svgPickColor];
+        svgColor.style.color = colorArray[svgPickColor];
 }
 
 function hideColor(){
