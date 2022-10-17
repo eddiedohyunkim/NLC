@@ -18,42 +18,39 @@ const svgColor = document.getElementById('svgColor');
 
 document.addEventListener('visibilitychange', function (event){ document.hidden ? color() : setTimeout(hideColor, 500) } );
 
-(function(){
-    let links = document.getElementsByTagName('a');
-    for(const element of links){
-        let linkArrow = document.createElement("span");
-        linkArrow.innerHTML = '[&#8599;]';
-        linkArrow.className = 'link';
-        element.appendChild(linkArrow);
-    }
-}())
-
 function random(num){ return Math.floor(Math.random()*num) }
 
+let bgPickColor;
+let svgPickColor;
+
 function color(){
-    for(let i=0; i<change.length;i+=1){
-        change[i].style.WebkitTransitionDuration='0s';
+    bodyColor.innerHTML='';
+    svgColor.innerHTML='';
+
+    for(const element of change){
+        element.style.WebkitTransitionDuration='0s';
     }
-    let bgPickColor = random(colorArray.length);
-    let svgPickColor = random(colorArray.length);
+    bgPickColor = colorArray[ random(colorArray.length) ];
+    svgPickColor = colorArray[ random(colorArray.length) ];
 
     if(bgPickColor==svgPickColor){
         svgPickColor = random(colorArray.length);
     }
-
-    body.style.backgroundColor = colorArray[bgPickColor];
-        bodyColor.innerHTML = colorArray[bgPickColor];
-        bodyColor.style.color = colorArray[bgPickColor];
-    svg.style.fill = colorArray[svgPickColor];
-        svgColor.innerHTML = colorArray[svgPickColor];
-        svgColor.style.color = colorArray[svgPickColor];
+    body.style.backgroundColor = bgPickColor;
+    svg.style.fill = svgPickColor;
+        
 }
 
 function hideColor(){
-    for(let i=0; i<change.length;i+=1){
-        change[i].style.animationTimingFunction = 'linear';
-        change[i].style.WebkitTransitionDuration = '300ms';
+    for(const element of change){
+        element.style.animationTimingFunction = 'linear';
+        element.style.WebkitTransitionDuration = '300ms';
     }
     body.style.backgroundColor = '#FFFFFF';
-    svg.style.fill = '#000000';
+    svg.style.fill = '#000000';   
+
+    bodyColor.innerHTML = bgPickColor;
+    bodyColor.style.color = bgPickColor;
+    svgColor.innerHTML = svgPickColor;
+    svgColor.style.color = svgPickColor;
 }

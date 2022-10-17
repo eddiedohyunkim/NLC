@@ -1,16 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Eddie Kim — NLC F22</title>
-    <link rel="stylesheet" href="styles.css">
-  </head>
-  <body class='change'>
-    <?xml version="1.0" encoding="utf-8"?>
-      <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 859.4 1000" style="enable-background:new 0 0 859.4 1000;" xml:space="preserve">
-        <path id='eddie' class='change' d="M561.8,143.7c0.3,0.1,0.6,0.1,1,0.1C562.4,143.8,562.1,143.7,561.8,143.7z M397.5,141.1
+M561.8,143.7c0.3,0.1,0.6,0.1,1,0.1C562.4,143.8,562.1,143.7,561.8,143.7z M397.5,141.1
   c0.2,0.1,0.4,0.3,0.6,0.3C397.9,141.3,397.7,141.2,397.5,141.1C397.6,141.1,397.6,141.1,397.5,141.1z M858.3,658.9
   c-1.9-8.6-3.3-20.4-4.1-23.8s-22.7-137.3-22.7-142.3s-6.1-26.8-6.4-32c-0.3-5.2-6.1-27.4-6.9-28.2c-0.8-0.8-0.3-4.1-5.8-7.2
   c-5.5-3-9.4-14.4-9.4-14.4s0-15.2-11.3-12.4c-6.4,3.6-8,3.9-8,3.9s-53.6,3.9-55,3.9l0,0c-7.3-23.5-16.8-54-16.8-56.1
@@ -552,29 +540,4 @@
   c1.2,0.6,5-1.2,5-1.2s2.6-0.3,3.5,0.6c0.9,0.9,1.8-0.6,3.2-0.9c1.5-0.3,4.1,0,5.3,0.3c1.2,0.3,2.6,0.6,5,0.9
   c2.3,0.3,39.5,3.8,42.2,4.4c2.1,0.5,18.3,1.2,26.3,1.1c-2.4,1.1-5.4,2.5-6.2,2.7c-1.4,0.3-43,13-45.4,13.7s-15.4,1.7-12.3,10.9
   s14.3,11.9,19.5,12.6c5.1,0.7,18.4,0.3,26.6-1c8.2-1.4,33.1-6.1,33.1-6.1s0.7,1.7,2,2c1.4,0.3,9.9,2,10.9,2s28.7-1,30.7-2
-  c7.9,5.5,27.6,14.3,27.6,14.3l2.4,32.1c0,0,2.4,6.1,7.9,7.8c4.5,1.4,8.5,1.4,11.1,0.6C585.9,724.7,582.9,730.7,581.7,734z"/>
-    </svg>
-    <div>
-      <p>Eddie Kim — Next Level Coding <wbr>Fall 2022 <wbr>Talia Cotton</p> 
-      <p>&emsp;<a href='https://eddiedohyunkim.github.io/nlc/findeddie/' target='_blank'>Project 1: You show-off!</a></p>
-      <p>&emsp;<a href='https://eddiedohyunkim.github.io/nlc/slow-moving-crisis/' target='_blank'>Project 2: Editorial Illustration</a></p>
-      <p>&emsp;Project 3: Periodical Logo</p>
-      <p>&emsp;&emsp;<a href='https://eddiedohyunkim.github.io/nlc/periodical-logo/' target='_blank'>Logo generator</a></p>
-       
-      <p><br><span id='bodyColor'></span> <span id='svgColor'></span></p>
-    </div>
-      
-  </body>
-  <script>
-    window.addEventListener('load', (event) => {
-      let links = document.getElementsByTagName('a');
-      for(const element of links){
-        let linkArrow = document.createElement("span");
-        linkArrow.innerHTML = '[&#8599;]';
-        linkArrow.className = 'link';
-        element.appendChild(linkArrow);
-      }
-    });
-  </script>
-  <script src='script.js'></script>
-</html>
+  c7.9,5.5,27.6,14.3,27.6,14.3l2.4,32.1c0,0,2.4,6.1,7.9,7.8c4.5,1.4,8.5,1.4,11.1,0.6C585.9,724.7,582.9,730.7,581.7,734z
