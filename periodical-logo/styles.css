@@ -34,6 +34,13 @@ body {
 	transform: translate(-50%, -50%);
 	/*background-color: yellow;*/
 }
+#SVGcontainer{
+	width: auto;
+	position: fixed;
+	top: 50vh;
+	left: 50vw;
+	transform: translate(-50%, -50%);
+}
 
 #logo-container{
 	width: 100%;
@@ -48,27 +55,33 @@ body {
 	/*border: 1px solid black;*/
 }
 .space{
-	width: 100px;
+	width: 80px;
 	height: 210px;
 	/*border: 1px solid red;*/
 }
 .pixels{
-	width: 100%;
-	height: 100%;
-	background-color: black;
+	margin: 3px;
+	/*width: 100%;*/
+	/*height: 100%;*/
+	width: 24px;
+	height: 24px;
+	background-color: #000;
 	z-index: 10000;
 	/*border-radius: 100%;*/
 }
 .data{
-	width: 100%;
-	height: 100%;
+	margin: 3px;
+	/*width: 100%;*/
+	/*height: 100%;*/
+	width: 24px;
+	height: 24px;
 	border-radius: 100%;
 	background-color: #29ABE2;
 }
 .line{
 	padding:0px;
 	margin:0px;
-	height:4px;
+	height:6px;
 	background-color:#000;
 	line-height:1px;
 	position:absolute;
@@ -76,8 +89,9 @@ body {
 .dataline{
 	padding:0px;
 	margin:0px;
-	height:2px;
+	height:4px;
 	background-color:#29ABE2;
+	/*opacity: 0;*/
 	line-height:1px;
 	position:absolute;
 }
