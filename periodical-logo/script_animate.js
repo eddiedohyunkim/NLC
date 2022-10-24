@@ -1,62 +1,92 @@
-let posW = [ [1,1], [1,7], [3,6], [3,2], [5,7], [5,1] ];
-const orderW = [ [0,1],[1,2],[2,3],[2,4],[4,5] ];
-
-let posI = [ [1,1], [3,1], [5,1], [1,7], [3,7], [5,7] ];
-const orderI = [ [0,1],[1,2],[1,4],[3,4],[4,5] ];
-
-let posR = [ [1,1], [5,1], [5,3], [1,3], [1,7], [5,7] ];
-const orderR = [ [0,1],[1,2],[2,3],[0,3],[3,4],[3,5] ];
-
-let posE = [ [1,1], [5,1], [1,4], [5,4], [1,7], [5,7] ];
-const orderE = [ [0,1],[0,2],[2,3],[4,5],[2,4] ];
-
-let posD = [ [1,1], [4,1], [5,2], [1,7], [4,7], [5,6] ];
-const orderD = [ [0,1],[1,2],[2,5],[0,3],[3,4],[4,5] ];
-
 const wired = 'WIRED';
-let dataArray;
+let trends;
 
 drawData();
-setInterval(drawData, 1000)
+setInterval(drawData, 3000)
+
 function drawData(){
-	dataArray = [];
-	for(var i=0; i<wired.length; i+=1){
-		plotData(wired[i]);
-	}
-	connectData();
+	trends = [];
 
-	changePos(dataArray[0], posW);
-	changePos(dataArray[1], posI);
-	changePos(dataArray[2], posR);
-	changePos(dataArray[3], posE);
-	changePos(dataArray[4], posD);
+	let posW = [ [1,1], [1,6], [3,5], [3,1], [5,6], [5,1] ];
+	const orderW = [ [0,1],[1,2],[2,3],[2,4],[4,5] ];
 	
-	drawLetter('W', orderW, posW, 0);
-	drawLetter('I', orderI, posI, 1);
-	drawLetter('R', orderR, posR, 2);
-	drawLetter('E', orderE, posE, 3);
-	drawLetter('D', orderD, posD, 4);
-}
+	let posI = [ [1,1], [3,1], [5,1], [1,6], [3,6], [5,6] ];
+	const orderI = [ [0,1],[1,2],[1,4],[3,4],[4,5] ];
+	
+	let posR = [ [1,1], [5,1], [5,3], [1,3], [1,6], [5,6] ];
+	const orderR = [ [0,1],[1,2],[2,3],[0,3],[3,4],[3,5] ];
+	
+	let posE = [ [1,1], [5,1], [1,3], [5,3], [1,6], [5,6] ];
+	const orderE = [ [0,1],[0,2],[2,3],[4,5],[2,4] ];
+	
+	let posD = [ [1,1], [4,1], [5,3], [1,6], [4,6], [5,4] ];
+	const orderD = [ [0,1],[1,2],[2,5],[0,3],[3,4],[4,5] ];
 
-function plotData(letter){
-	let pixel = document.getElementsByClassName(`${letter}data`)[0];
-	let x = randomNum(5)+1;
-	let y = randomNum(7)+1;
-	dataArray.push([x,y])
-	pixel.style.gridColumn = x+'/'+(x+1);
-	pixel.style.gridRow = y+'/'+(y+1);
+	const url = 'https://www.randomnumberapi.com/api/v1.0/random?min=10&max=99&count=5';
+	fetch(url)
+		.then(function(response){return response.json();})
+		.then(function(json){getData(json);})
+
+	function getData(data) {
+		console.log(data);
+		for(let i=0; i<data.length; i+=1){
+			let so = data[i].toString()[0]
+			let st = data[i].toString()[1]
+			let co = map(parseFloat(st),0,9,0,4)+1;
+			let ct = map(parseFloat(so),1,9,0,5)+1;
+			trends.push([6-co, 7-ct])
+		}
+		console.log(trends);
+
+		plotData();
+		connectData();
+	
+		changePos(trends[0], posW);
+		changePos(trends[1], posI);
+		changePos(trends[2], posR);
+		changePos(trends[3], posE);
+		changePos(trends[4], posD);
+		
+		setTimeout(function(){ drawLetter('W', orderW, posW, 0)},0);
+		setTimeout(function(){ drawLetter('I', orderI, posI, 1)},100);
+		setTimeout(function(){ drawLetter('R', orderR, posR, 2)},200);
+		setTimeout(function(){ drawLetter('E', orderE, posE, 3)},300);
+		setTimeout(function(){ drawLetter('D', orderD, posD, 4)},400);
+	}
+}
+/*—————————————————————————————————————— Draw Data ——————————————————————————————————————*/
+function map(value, low1, high1, low2, high2) { return Math.round( low2 + (high2 - low2) * (value - low1) / (high1 - low1) ); }
+
+function plotData(){
+	for(var i=0; i<wired.length; i+=1){
+		let pixel = document.getElementsByClassName(`${wired[i]}data`)[0];
+		let x = trends[i][0];
+		let y = trends[i][1];
+		pixel.style.gridColumn = x+'/'+(x+1);
+		pixel.style.gridRow = y+'/'+(y+1);
+	}
 }
 
 function connectData(){
 	let data = document.getElementsByClassName('data');
+	let time = 100;
 	// for(var i=0; i<data.length-1; i+=1){
-		setTimeout(function(){ connect(data[0], data[1], `DataLine${0}`) }, 0);
-		setTimeout(function(){ connect(data[1], data[2], `DataLine${1}`) }, 100);
-		setTimeout(function(){ connect(data[2], data[3], `DataLine${2}`) }, 200);
-		setTimeout(function(){ connect(data[3], data[4], `DataLine${3}`) }, 300);
+	// 	for(let x=0; x<4; x+=1){
+	// 		setTimeout(function(){ connect(data[0], data[x+1], `DataLine${x}`) }, x*time);
+	// 	}
+	// 	for(let y=1; y<4; y+=1){
+	// 		setTimeout(function(){ connect(data[1], data[y+1], `DataLine${y+3}`) }, y*time);
+	// 	}
+	// 	for(let z=2; z<4; z+=1){
+	// 		setTimeout(function(){ connect(data[2], data[z+1], `DataLine${z+5}`) }, z*time);
+	// 	}
+	// 	setTimeout(function(){ connect(data[3], data[4], `DataLine${9}`) }, time*3);
 	// }
+	setTimeout(function(){ connect(data[0], data[1], `DataLine${0}`) }, 0);
+	setTimeout(function(){ connect(data[1], data[2], `DataLine${4}`) }, 100);
+	setTimeout(function(){ connect(data[2], data[3], `DataLine${7}`) }, 200);
+	setTimeout(function(){ connect(data[3], data[4], `DataLine${9}`) }, 300);
 }
-
 
 /*—————————————————————————————————————— Draw Letter ——————————————————————————————————————*/
 function DistSquared(pt1, pt2) {
@@ -86,32 +116,19 @@ function changePos(data,letter){
 	letter.forEach(function(item, i) { if (item[1] === closest[1]) letter[i][1] = data[1]; });
 	
 	//execptions for letter D – Prevent 'D' not looking like 'D'
-	if (letter==posD){
-		if((data===posD[2])||(data===posD[5])){ posD[1][0]=posD[2][0]-1; posD[4][0]=posD[5][0]-1;
-		}else{ posD[2]=[ posD[1][0]+1, posD[1][1]+1 ]; posD[5]=[ posD[4][0]+1, posD[4][1]-1 ]; }
-	}
-	//execptions for letter W – Prevent 'W' looking like 'N'
-	if (letter==posW){
-		if(((data[0]===1)||(data[0]===5))&&(data[1]===4)){
-			if(data[0]===1){ posW[0] = [ data[0], data[1] ]; posW[5][1]=data[1]; }
-			if(data[0]===5){ posW[5] = [ data[0], data[1] ]; posW[0][1]=data[1]; } 
-			posW[2]=[3,7]; posW[3]=[3,posW[0][1]+1];
-		}else if(posW[3][1]<posW[0][1]){ posW[3][1]=posW[0][1]+1; }
-	}
+	// if (letter==posD){
+	// 	if((data===posD[2])||(data===posD[5])){ posD[1][0]=posD[2][0]-1; posD[4][0]=posD[5][0]-1;
+	// 	}else{ posD[2]=[ posD[1][0]+1, posD[1][1]+1 ]; posD[5]=[ posD[4][0]+1, posD[4][1]-1 ]; }
+	// }
+	// // execptions for letter W – Prevent 'W' looking like 'N'
+	// if (letter==posW){
+	// 	if(((data[0]===1)||(data[0]===5))&&(data[1]===4)){
+	// 		if(data[0]===1){ posW[0] = [ data[0], data[1] ]; posW[5][1]=data[1]; }
+	// 		if(data[0]===5){ posW[5] = [ data[0], data[1] ]; posW[0][1]=data[1]; } 
+	// 		posW[2]=[3,7]; posW[3]=[3,posW[0][1]+1];
+	// 	}else if(posW[3][1]<posW[0][1]){ posW[3][1]=posW[0][1]+1; }
+	// }
 }
-
-// changePos(dataArray[0], posW);
-// changePos(dataArray[1], posI);
-// changePos(dataArray[2], posR);
-// changePos(dataArray[3], posE);
-// changePos(dataArray[4], posD);
-
-// drawLetter('W', orderW, posW, 0);
-// drawLetter('I', orderI, posI, 1);
-// drawLetter('R', orderR, posR, 2);
-// drawLetter('E', orderE, posE, 3);
-// drawLetter('D', orderD, posD, 4);
-
 
 function drawLetter(letter, order, pos, num){
 	// plot dots
@@ -127,18 +144,17 @@ function drawLetter(letter, order, pos, num){
 	for(var i=0; i<order.length; i+=1){
 		connect(pixels[order[i][0]], pixels[order[i][1]], `${letter}L${i+1}`)
 	}
-	round(letter, dataArray[num]);
+	// round(letter, trends[num]);
 }
 function round(letter, data){ 
 	document.getElementById(`${letter}-${data}`).style.borderRadius = '100%'; 
-	// document.getElementById(`${letter}-${data}`).style.backgroundColor = `#40b0bf`; 
 }
-
 
 /*—————————————————————————————————————— SVG ——————————————————————————————————————*/
 let formattedXml;
 const doc = document.implementation.createDocument(', ', null);
-setSVG();
+
+// setSVG();
 
 function setSVG() {
 	const svgElem = doc.createElement('svg');
@@ -170,7 +186,7 @@ function xmlWriter(){
 	const str = heading + s.serializeToString(doc);
 	const format = require('xml-formatter');
 	formattedXml = format(str);
-	// print();
+	print();
 }
 
 function print (){

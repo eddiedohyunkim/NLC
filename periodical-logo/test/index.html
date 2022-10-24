@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+
+</body>
+<script>
+let pos =[];
+// for(let i=0; i<5; i+=1){
+	call()
+// }
+function call(){
+	const url = 'https://www.randomnumberapi.com/api/v1.0/random?min=10&max=99&count=5';
+	fetch(url)
+		.then(function(response){return response.json();})
+		.then(function(json){getJournalData(json);})
+}
+
+function getJournalData(data) {
+	console.log(data);
+	for(let i=0; i<data.length; i+=1){
+		let so = data[i].toString()[0]
+		let st = data[i].toString()[1]
+		let co = map(parseFloat(so),1,9,1,4)+1;
+		let ct = map(parseFloat(st),1,9,1,5)+1;
+		pos.push([co, ct ])
+	}
+	console.log(pos);
+}
+
+function map(value, low1, high1, low2, high2) {
+    return Math.round( low2 + (high2 - low2) * (value - low1) / (high1 - low1) );
+}
+</script>
+</html>
