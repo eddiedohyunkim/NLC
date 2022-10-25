@@ -1,4 +1,4 @@
-div, span, applet, object, iframe,
+html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -22,25 +22,40 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
-body{
-	line-height: 1.1;
-	font-size: 5vw;
+@font-face {
+	font-family: Arial_Black;
+	src: url(assets/arial_black.ttf);
+}
+body {
+	font-family: Arial_Black;
+	line-height: 1.05;
+	/*background-color: white;*/
+	/*mix-blend-mode: difference;*/
+}
+div{
+	position: fixed;
+	top: 0;
 }
 a{
-	text-decoration: none;
+	color: #000;
+	/*text-decoration: none;*/
 }
-#textCont{
-	width: 100%;
-	top: 50vh;
-	left: 50vw;
-	position: fixed;
-	transform: translate(-50%, -50%);
-	filter: brightness(0);
-	text-align: center;
-	cursor: default;
+#eddie{
+	fill: #000000;
 }
-span{
-	background-color: #FFFFFF00;
-    vertical-align: middle;
+.link{
+	font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+	font-size: 0.8em;
+	padding-left: 0.1em;
+	font-weight: 800;
+	
 }
-
+@media (hover) and (min-width: 400px) {
+	body {font-size: 1em;}
+}
+@media (hover) and (min-width: 800px) {
+	body {font-size: 1.5em;}
+}
+@media (hover) and (min-width: 1000px) {
+	body {font-size: 2em;}
+}

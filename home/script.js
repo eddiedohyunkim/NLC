@@ -1,56 +1,82 @@
-const colorArray = [
-    '#FF6633', '#FFB399', '#FF33FF', '#FFFF99', '#00B3E6', 
-    '#E6B333', '#3366E6', '#999966', '#99FF99', '#B34D4D',
-    '#80B300', '#809900', '#E6B3B3', '#6680B3', '#66991A', 
-    '#FF99E6', '#CCFF1A', '#FF1A66', '#E6331A', '#33FFCC',
-    '#66994D', '#B366CC', '#4D8000', '#B33300', '#CC80CC', 
-    '#66664D', '#991AFF', '#E666FF', '#4DB3FF', '#1AB399',
-    '#E666B3', '#33991A', '#CC9999', '#B3B31A', '#00E680', 
-    '#4D8066', '#809980', '#E6FF80', '#1AFF33', '#999933',
-    '#FF3380', '#CCCC00', '#66E64D', '#4D80CC', '#9900B3', 
-    '#E64D66', '#4DB380', '#FF4D4D', '#99E6E6', '#6666FF'
-];
-const body = document.body;
-const svg = document.getElementById('eddie');
-const change = document.getElementsByClassName('change');
-const bodyColor = document.getElementById('bodyColor');
-const svgColor = document.getElementById('svgColor');
+const text = {
+    name: 'Eddie Kim—',
+    title: 'Next Level Coding Fall 2022 Talia Cotton',
+    project: [
+        ['Project 1: You show-off!', 'https://eddiedohyunkim.github.io/nlc/findeddie/'],
+        ['Project 2: Editorial Illustration', 'https://eddiedohyunkim.github.io/nlc/slow-moving-crisis/'],
+        ['Project 3: Periodical Logo', 'https://eddiedohyunkim.github.io/nlc/periodical-logo/'],
+        ['Intermission: Cookies', '']
+    ]
+}
+let fonts;
+const url = "https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyAsv81hZA0Wg-tEZj1lrqKrQNyUUSyJdvk"
+fetch(url)
+    .then(function(response){return response.json();})
+    .then(function(json){googleFonts(json);})
 
-document.addEventListener('visibilitychange', function (event){ document.hidden ? color() : setTimeout(hideColor, 500) } );
-
-function random(num){ return Math.floor(Math.random()*num) }
-
-let bgPickColor;
-let svgPickColor;
-
-function color(){
-    bodyColor.innerHTML='';
-    svgColor.innerHTML='';
-
-    for(const element of change){
-        element.style.WebkitTransitionDuration='0s';
+function googleFonts(data) {
+    fonts = data;
+    console.log(fonts);
+    for(let i=0; i<fonts.items.length; i+=1){
+        setFontLink(i)
     }
-    bgPickColor = colorArray[ random(colorArray.length) ];
-    svgPickColor = colorArray[ random(colorArray.length) ];
 
-    if(bgPickColor==svgPickColor){
-        svgPickColor = random(colorArray.length);
+    createSpan(text.name, 'titleCont0')
+    createSpan(text.title, 'titleCont1')
+    for(let i=0; i<text.project.length; i+=1){
+        createSpan(text.project[i][0], `projCont${i}`,text.project[i][1])
     }
-    body.style.backgroundColor = bgPickColor;
-    svg.style.fill = svgPickColor;
-        
 }
 
-function hideColor(){
-    for(const element of change){
-        element.style.animationTimingFunction = 'linear';
-        element.style.WebkitTransitionDuration = '300ms';
-    }
-    body.style.backgroundColor = '#FFFFFF';
-    svg.style.fill = '#000000';   
+function createSpan(item, cont, link){
+    for(let i=0; i<item.length; i+=1){
+        let span = document.createElement('span');
+        span.innerHTML = item[i];
 
-    bodyColor.innerHTML = bgPickColor;
-    bodyColor.style.color = bgPickColor;
-    svgColor.innerHTML = svgPickColor;
-    svgColor.style.color = svgPickColor;
+        let choose = fonts.items[random(fonts.items.length)];
+        span.style.fontFamily = choose.family+", " + choose.category;
+        // span.style.backgroundColor = `rgb(${random(256)},${random(256)},${random(256)})`;
+        let duration = 5;
+        span.addEventListener('mouseover', change);
+
+        // let div = document.getElementById('titleCont1');
+        // div.addEventListener('touchstart', change);
+        // div.addEventListener('touchmove', change);
+        function change(){
+             span.style.fontFamily = fonts.items[random(fonts.items.length)].family 
+            let c = 0;
+            let interval = setInterval(function(){
+                c++;
+                span.style.fontFamily = fonts.items[random(fonts.items.length)].family 
+                if(c===duration){
+                    clearInterval(interval);
+                }
+            }, 100);
+        }
+
+        // document.addEventListener('touchstart', showCoordinates, false);
+    // document.addEventListener('touchmove', showCoordinates, false);
+        if(link){
+            let a = document.createElement('a');
+            a.href = link;
+            a.target = '_blank';
+            document.getElementById(cont).appendChild(a).appendChild(span);
+            // document.a; 
+        }else{
+            document.getElementById(cont).appendChild(span);    
+        }
+        
+    } 
+}
+
+function setFontLink(num){
+    let font = fonts.items[num];
+    let fontLink = document.createElement("link");
+    fontLink.setAttribute("rel", "stylesheet");
+    fontLink.setAttribute("href", "https://fonts.googleapis.com/css?family=" + font.family);
+    document.head.appendChild(fontLink);
+}
+
+function random(num){
+    return Math.floor(Math.random()*num);
 }
