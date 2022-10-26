@@ -24,9 +24,11 @@ footer, header, hgroup, menu, nav, section {
 }
 body{
 	line-height: 1.1;
+	/*font-size: 7vmin;*/
 	font-size: 5vw;
 }
-a{
+.a_blue{
+	/*filter: brightness(0);*/
 	text-decoration: none;
 }
 #textCont{
@@ -40,7 +42,6 @@ a{
 	cursor: default;
 }
 span{
-	background-color: #FFFFFF00;
     vertical-align: middle;
 }
 

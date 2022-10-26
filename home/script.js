@@ -37,31 +37,18 @@ function createSpan(item, cont, link){
         span.style.fontFamily = choose.family+", " + choose.category;
         // span.style.backgroundColor = `rgb(${random(256)},${random(256)},${random(256)})`;
         let duration = 5;
-        span.addEventListener('mouseover', change);
+        span.addEventListener('mouseover', event => {span.style.fontFamily=fonts.items[random(fonts.items.length)].family});
 
         // let div = document.getElementById('titleCont1');
         // div.addEventListener('touchstart', change);
         // div.addEventListener('touchmove', change);
-        function change(){
-             span.style.fontFamily = fonts.items[random(fonts.items.length)].family 
-            let c = 0;
-            let interval = setInterval(function(){
-                c++;
-                span.style.fontFamily = fonts.items[random(fonts.items.length)].family 
-                if(c===duration){
-                    clearInterval(interval);
-                }
-            }, 100);
-        }
 
-        // document.addEventListener('touchstart', showCoordinates, false);
-    // document.addEventListener('touchmove', showCoordinates, false);
         if(link){
             let a = document.createElement('a');
             a.href = link;
             a.target = '_blank';
+            a.className = 'a_blue';
             document.getElementById(cont).appendChild(a).appendChild(span);
-            // document.a; 
         }else{
             document.getElementById(cont).appendChild(span);    
         }
