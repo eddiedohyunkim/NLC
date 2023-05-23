@@ -22,21 +22,27 @@ function drawData(){
 	let posD = [ [1,1], [4,1], [5,3], [1,6], [4,6], [5,4] ];
 	const orderD = [ [0,1],[1,2],[2,5],[0,3],[3,4],[4,5] ];
 
-	const url = 'https://www.randomnumberapi.com/api/v1.0/random?min=10&max=99&count=5';
-	fetch(url)
-		.then(function(response){return response.json();})
-		.then(function(json){getData(json);})
+	// const url = 'https://www.randomnumberapi.com/api/v1.0/random?min=10&max=99&count=5';
+	// fetch(url)
+	// 	.then(function(response){return response.json();})
+	// 	.then(function(json){getData(json);})
 
-	function getData(data) {
-		console.log(data);
-		for(let i=0; i<data.length; i+=1){
-			let so = data[i].toString()[0]
-			let st = data[i].toString()[1]
+	getData()
+	function getData() {
+		// console.log(data);
+		// for(let i=0; i<data.length; i+=1){
+		for(let i=0; i<5; i+=1){
+			let data = randomNumber();
+			// console.log(data)
+			// let so = data[i].toString()[0]
+			// let st = data[i].toString()[1]
+			let so = data.toString()[0]
+			let st = data.toString()[1]
 			let co = map(parseFloat(st),0,9,0,4)+1;
 			let ct = map(parseFloat(so),1,9,0,5)+1;
 			trends.push([6-co, 7-ct])
 		}
-		console.log(trends);
+		// console.log(trends);
 
 		plotData();
 		connectData();
@@ -52,6 +58,10 @@ function drawData(){
 		setTimeout(function(){ drawLetter('R', orderR, posR, 2)},200);
 		setTimeout(function(){ drawLetter('E', orderE, posE, 3)},300);
 		setTimeout(function(){ drawLetter('D', orderD, posD, 4)},400);
+	}
+
+	function randomNumber(){
+		return Math.floor(Math.random()*89)+10;
 	}
 }
 /*—————————————————————————————————————— Draw Data ——————————————————————————————————————*/

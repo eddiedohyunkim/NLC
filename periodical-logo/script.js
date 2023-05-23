@@ -136,58 +136,58 @@ function round(letter, data){
 
 
 /*—————————————————————————————————————— SVG ——————————————————————————————————————*/
-let formattedXml;
-const doc = document.implementation.createDocument(', ', null);
-setSVG();
+// let formattedXml;
+// const doc = document.implementation.createDocument(', ', null);
+// setSVG();
 
-function setSVG() {
-	const svgElem = doc.createElement('svg');
-	svgElem.setAttribute('xmlns','http://www.w3.org/2000/svg');
-	svgElem.setAttribute('version','1.0');
-	// svgElem.setAttribute('style', ' background-color:gray;');
-	let width = document.getElementById('big-container').offsetWidth;
-	let height = document.getElementById('big-container').offsetHeight+200;
-	svgElem.setAttribute('width',width);
-	svgElem.setAttribute('height',height);
+// function setSVG() {
+// 	const svgElem = doc.createElement('svg');
+// 	svgElem.setAttribute('xmlns','http://www.w3.org/2000/svg');
+// 	svgElem.setAttribute('version','1.0');
+// 	// svgElem.setAttribute('style', ' background-color:gray;');
+// 	let width = document.getElementById('big-container').offsetWidth;
+// 	let height = document.getElementById('big-container').offsetHeight+200;
+// 	svgElem.setAttribute('width',width);
+// 	svgElem.setAttribute('height',height);
 
-	let datas = document.getElementsByClassName('data');
-	for(let i=0; i<datas.length-1; i+=1){
-		const path = document.createElement('path');
-		path.setAttribute('d', connectSVG(datas[i], datas[i+1]) );
-		path.setAttribute('stroke', '#f07');
-		// path.setAttribute('stroke', '#fff');
-		path.setAttribute('stroke-width', '4');
-		path.setAttribute('fill', 'transparent');
-		svgElem.appendChild(path);	
-	}
-	doc.appendChild(svgElem);
-	xmlWriter();
-} 
+// 	let datas = document.getElementsByClassName('data');
+// 	for(let i=0; i<datas.length-1; i+=1){
+// 		const path = document.createElement('path');
+// 		path.setAttribute('d', connectSVG(datas[i], datas[i+1]) );
+// 		path.setAttribute('stroke', '#f07');
+// 		// path.setAttribute('stroke', '#fff');
+// 		path.setAttribute('stroke-width', '4');
+// 		path.setAttribute('fill', 'transparent');
+// 		svgElem.appendChild(path);	
+// 	}
+// 	doc.appendChild(svgElem);
+// 	xmlWriter();
+// } 
 
-function xmlWriter(){
-	const heading = '<?xml version="1.0" encoding="UTF-8"?>'
-	const s = new XMLSerializer();
-	const str = heading + s.serializeToString(doc);
-	const format = require('xml-formatter');
-	formattedXml = format(str);
-	// print();
-}
+// function xmlWriter(){
+// 	const heading = '<?xml version="1.0" encoding="UTF-8"?>'
+// 	const s = new XMLSerializer();
+// 	const str = heading + s.serializeToString(doc);
+// 	const format = require('xml-formatter');
+// 	formattedXml = format(str);
+// 	// print();
+// }
 
-function print (){
-	const container = document.getElementById('SVGcontainer');
-	container.innerHTML = formattedXml;
-};
+// function print (){
+// 	const container = document.getElementById('SVGcontainer');
+// 	container.innerHTML = formattedXml;
+// };
 
-function connectSVG(div1, div2) {
-    let off1 = getOffset(div1);
-    let off2 = getOffset(div2);
-    let cont = getOffset(document.getElementById('big-container'));
-    let x1 = off1.left - cont.left + (off1.width/2);
-	let y1 = off1.top - cont.top + (off1.height/2)+100;
-	let x2 = off2.left - cont.left + (off2.width/2);
-	let y2 = off2.top - cont.top  + (off2.height/2)+100;
-    return `M ${x1} ${y1} C ${x1+70} ${y1+70}, ${x2-70} ${y1-70}, ${x2} ${y2}`;
-}
+// function connectSVG(div1, div2) {
+//     let off1 = getOffset(div1);
+//     let off2 = getOffset(div2);
+//     let cont = getOffset(document.getElementById('big-container'));
+//     let x1 = off1.left - cont.left + (off1.width/2);
+// 	let y1 = off1.top - cont.top + (off1.height/2)+100;
+// 	let x2 = off2.left - cont.left + (off2.width/2);
+// 	let y2 = off2.top - cont.top  + (off2.height/2)+100;
+//     return `M ${x1} ${y1} C ${x1+70} ${y1+70}, ${x2-70} ${y1-70}, ${x2} ${y2}`;
+// }
 
 /*—————————————————————————————————————— Drawing Lines ——————————————————————————————————————*/
 function randomNum(max) { return Math.floor(Math.random() * max); }
